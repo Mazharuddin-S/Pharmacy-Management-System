@@ -1,0 +1,135 @@
+#removeMed {
+  width: 100%;
+  height: 88vh;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+}
+#searchRemove {
+  width: 40%;
+  height: 10vh;
+  position: absolute;
+  top: 1rem;
+  z-index: 2;
+}
+#typeToRemove {
+  display: flex;
+  border: 0.1rem solid tomato;
+  width: 100%;
+}
+#searchRemove input {
+  height: 2rem;
+  width: 100%;
+  padding: 0.3rem 0.5rem;
+  font-size: large;
+  outline: none;
+  border: none;
+}
+#searchRemove button {
+  border: none;
+}
+#searchRemove button:hover {
+  background-color: red;
+  color: lightgray;
+  letter-spacing: 0.1rem;
+}
+#recommendRemove {
+  background-color: white;
+  max-height: 25vh;
+  overflow-y: auto;
+  /* border: 0.1rem solid rgb(241, 129, 129); */
+}
+
+#recommendRemove > div {
+  padding: 0.5rem 1rem;
+  border-bottom: 0.1rem solid rgb(241, 129, 129);
+  border-right: 0.1rem solid rgb(241, 129, 129);
+  border-left: 0.1rem solid rgb(241, 129, 129);
+}
+
+#recommendRemove > div:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+#removeList {
+  width: 70%;
+  height: 70vh;
+  overflow-y: auto;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 10vh;
+  z-index: 1;
+}
+
+#removeList .table {
+  display: table;
+  width: 100%;
+  position: relative;
+  background-color: whitesmoke;
+  border: 0.1rem solid lightgray;
+
+  box-shadow: 0.1rem 0.1rem 0.1rem lightgray;
+}
+#removeList .head {
+  background-color: antiquewhite;
+  font-weight: bold;
+}
+#removeList .table button {
+  border: none;
+
+  background-color: greenyellow;
+  padding: 0.2rem;
+}
+#removeList button:hover {
+  background-color: red;
+  color: lightgray;
+}
+#removeList > div:last-child {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  justify-content: center;
+}
+#deleteSelectedBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  border: none;
+
+  background-color: greenyellow;
+}
+#deleteSelectedBtn:hover {
+  letter-spacing: 0.1rem;
+  color: lightgray;
+}
+
+#confirmBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 4;
+  border: 0.1rem solid lightgray;
+  border-radius: 0.2rem;
+  padding: 1rem;
+  background-color: lightcyan;
+}
+#confirmBox > div {
+  display: flex;
+  justify-content: space-between;
+}
+#confirmBox button {
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+}
+#confirmBox button:hover {
+  border: 0.2rem solid black;
+}
+#confirmBox button:first-child {
+  background-color: red;
+}
+#confirmBox button:last-child {
+  background-color: green;
+}

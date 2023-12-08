@@ -1,0 +1,53 @@
+#registerPage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/images/register.jpg");
+  background-size: cover;
+}
+#registerPage h1 {
+  margin: 0;
+}
+#registerInfo {
+  /* border: 1px solid blue; */
+  background-color: rgba(199, 232, 240, 0.5);
+  box-shadow: 0.2rem 0.2rem 0.5rem gray;
+  letter-spacing: 0.1rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-width: 30vw;
+  font-weight: bold;
+}
+#registerInfo > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+#registerInfo label {
+  font-size: 1.2rem;
+}
+#registerInfo input {
+  margin-left: 1rem;
+  font-weight: bold;
+  outline-color: cyan;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+#registerInfo button {
+  display: block;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+
+  padding: 0.5rem 1rem;
+  border-color: transparent;
+  border-radius: 0.5rem;
+  background-color: cyan;
+  margin: 1rem auto 0;
+}
+#registerInfo button:hover {
+  border-color: green;
+  color: white;
+}

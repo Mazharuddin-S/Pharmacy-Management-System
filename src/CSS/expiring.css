@@ -1,0 +1,15 @@
+#expiring {
+  padding: 1rem;
+}
+#expiring h3 {
+  font-weight: normal;
+}
+#expiring table th {
+  color: gray;
+}
+#expiring td,
+th {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border-bottom: 0.1rem solid lightgray;
+}

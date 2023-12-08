@@ -1,0 +1,36 @@
+import React, { useState } from "react";
+import { Routes, Route, useParams, useSearchParams } from "react-router-dom";
+import "./App.css";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+import Home from "./Components/home";
+import SearchMedicine from "./Components/searchMed";
+import RemoveMedicine from "./Components/removeMedicine";
+import AddMedicine from "./Components/addMedicine";
+import Dashboard from "./Components/dashboard";
+import Expiring from "./Components/expiring";
+import OutOfStock from "./Components/outOfStock";
+
+function App() {
+  const [searchParam, setSearchParam] = useSearchParams();
+  const userId = searchParam.get("user");
+
+  return (
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path={"Users"} element={<Home />}>
+          <Route path="" element={<SearchMedicine />} />
+          <Route path="dashboard" element={<Dashboard />}></Route>
+          <Route path="expiring" element={<Expiring />} />
+          <Route path="out-of-stock" element={<OutOfStock />} />
+          <Route path="removeMedicine" element={<RemoveMedicine />} />
+          <Route path="addMedicine" element={<AddMedicine />} />
+        </Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;

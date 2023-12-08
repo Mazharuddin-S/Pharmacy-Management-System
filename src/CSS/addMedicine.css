@@ -1,0 +1,101 @@
+#addMed {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+}
+
+#medDetails {
+  border: 0.1rem solid lightgray;
+  width: 30%;
+}
+#medDetails form {
+  display: flex;
+  flex-direction: column;
+}
+#medDetails form > div {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0.5rem;
+}
+#medDetails form label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+#medDetails form input {
+  outline: none;
+  border: 0.1rem solid rgb(140, 233, 250);
+  height: 2rem;
+  padding: 0 0.5rem;
+  font-size: large;
+  border-radius: 0.5rem;
+}
+#medDetails form button {
+  display: block;
+  width: max-content;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: lightseagreen;
+  font-weight: bold;
+  border-radius: 0.2rem;
+
+  letter-spacing: 0.1rem;
+}
+#medDetails form button:hover {
+  color: lightgray;
+  background-color: darkcyan;
+  letter-spacing: 0.2rem;
+}
+#medDetailsTable {
+  width: 65%;
+}
+#medDetailsTable .table {
+  width: 100%;
+  border: 0.1rem solid lightgray;
+  display: table;
+  box-shadow: 0.1rem 0.1rem 0.1rem lightgray;
+}
+#medDetailsTable .table .row {
+  display: table-row;
+  border-bottom: 0.1rem solid lightgray;
+}
+#medDetailsTable .table .row:last-child {
+  border-bottom: none;
+}
+#medDetailsTable .table .header {
+  background-color: bisque;
+  font-weight: bold;
+}
+#medDetailsTable .cols {
+  display: table-cell;
+  border-right: 0.1rem solid lightgray;
+}
+#medDetailsTable .cols button {
+  border: none;
+  background-color: lightgreen;
+  padding: 0.3rem;
+}
+#medDetailsTable .cols button:hover {
+  background-color: red;
+}
+#medDetailsTable .cols:last-child {
+  border-right: none;
+}
+#medDetailsTable > div:last-child {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+#addToinventory button {
+  border: none;
+  font-weight: bold;
+  background-color: chartreuse;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+}
+#addToinventory button:hover {
+  background-color: darkgreen;
+  color: lightgray;
+  letter-spacing: 0.1rem;
+}
