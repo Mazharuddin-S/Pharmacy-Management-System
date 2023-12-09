@@ -9,6 +9,7 @@ import AddMedicine from "./Components/addMedicine";
 import Dashboard from "./Components/dashboard";
 import Expiring from "./Components/expiring";
 import OutOfStock from "./Components/outOfStock";
+import ErrorPage from "./Components/erroPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="out-of-stock" element={<OutOfStock />} />
           <Route path="removeMedicine" element={<RemoveMedicine />} />
           <Route path="addMedicine" element={<AddMedicine />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </div>
