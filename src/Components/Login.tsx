@@ -43,14 +43,14 @@ function Login() {
           userActions.login(`${loginData.userName}${loginData.password}`)
         );
         setError(false);
-      } else {
-        setError(true);
       }
-
       output &&
         navigate(`Users?user=${loginData.userName}${loginData.password}`, {
           replace: true,
         });
+    }
+    if (!usersList) {
+      setError(true);
     }
   }
   return (
