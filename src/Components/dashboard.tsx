@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import "../CSS/dashboard.css";
 import { useSelector } from "react-redux";
@@ -10,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Dashboard() {
-  let [searchParam, setSearchParam] = useSearchParams();
+  let [searchParam] = useSearchParams();
   let userId = searchParam.get("user");
   const medList = useSelector((store: any) => store.userData.medicineList);
   let stock = 0;

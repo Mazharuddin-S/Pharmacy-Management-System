@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 
 function AddMedicine() {
   let dispatch = useDispatch();
-  let [searchParam, setSearchParam] = useSearchParams();
+  let [searchParam] = useSearchParams();
   let userId = searchParam.get("user");
 
   type medType = {
@@ -41,6 +41,7 @@ function AddMedicine() {
   function removeHandler(ind: number) {
     setDetailsArr(prev => {
       return prev.filter((item, index: number) => {
+        item;
         return index !== ind;
       });
     });

@@ -6,7 +6,7 @@ import { MedObjectType, userActions } from "../Store/store";
 import { useSearchParams } from "react-router-dom";
 
 function SearchMedicine() {
-  let [searchParam, setSearchParam] = useSearchParams();
+  let [searchParam] = useSearchParams();
   let userId = searchParam.get("user");
   let MedData = useSelector((state: any) => {
     return state.userData;
@@ -49,7 +49,7 @@ function SearchMedicine() {
     }
   }
   // CLICK HANDLER ----------------
-  function clickHandler(event: React.MouseEvent<HTMLDivElement>, name: string) {
+  function clickHandler(name: string) {
     let value = name.toLowerCase();
 
     let selected = MedData.medicineList.filter((item: MedObjectType) => {
@@ -68,9 +68,10 @@ function SearchMedicine() {
     });
   }
   // REMOVE Handler ----------------
-  function removeHandler(event: any, index: number | string) {
+  function removeHandler(index: number | string) {
     let filter = selected;
     let filter2 = filter.filter((item: any, ind: number | string) => {
+      item;
       return ind != index;
     });
     setSelected(filter2);
@@ -96,7 +97,7 @@ function SearchMedicine() {
         modified.push(item);
       }
     });
-    setForsum(prev => {
+    setForsum(() => {
       return modified;
     });
   }
@@ -135,7 +136,7 @@ function SearchMedicine() {
               item.name.slice(0, 1).toUpperCase() +
               item.name.slice(1).toLowerCase();
             return (
-              <div key={index} onClick={event => clickHandler(event, name)}>
+              <div key={index} onClick={() => clickHandler(name)}>
                 {name}
               </div>
             );
@@ -186,10 +187,7 @@ function SearchMedicine() {
                     />
                   </div>
                   <div className="cols">
-                    <button
-                      id="removeBtn"
-                      onClick={event => removeHandler(event, index)}
-                    >
+                    <button id="removeBtn" onClick={() => removeHandler(index)}>
                       X
                     </button>
                   </div>

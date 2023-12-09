@@ -5,7 +5,7 @@ import { Outlet, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function Home() {
-  const [searchParam, setSearchParam] = useSearchParams();
+  const [searchParam] = useSearchParams();
   const userInfo = useSelector((state: any) => {
     return state.userData;
   });

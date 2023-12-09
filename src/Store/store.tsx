@@ -1,5 +1,4 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
-import { useSearchParams } from "react-router-dom";
 
 // Type MedData ....
 
@@ -56,6 +55,7 @@ let userDataSlice = createSlice({
       return user ? JSON.parse(user) : state;
     },
     addMedicine: (state, action) => {
+      state;
       let arr = action.payload.detailsArr;
       let prev = localStorage.getItem(action.payload.userId);
       let prevState = prev ? JSON.parse(prev) : {};
@@ -103,6 +103,7 @@ let userDataSlice = createSlice({
       builder.addCase(
         signUpActions.register,
         (state: {}, action: { payload: { userData: any } }) => {
+          state;
           return action.payload.userData;
         }
       );
@@ -119,6 +120,4 @@ export const Store = configureStore({
     userData: userReducer,
   },
 });
-let unsubscribe = Store.subscribe(() =>
-  console.log("updated state", Store.getState())
-);
+Store.subscribe(() => console.log("updated state", Store.getState()));

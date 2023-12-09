@@ -13,7 +13,7 @@ function RemoveMedicine() {
     return state.userData.medicineList;
   });
   const dispatch = useDispatch();
-  const [searchParam, setSearchParam] = useSearchParams();
+  const [searchParam] = useSearchParams();
   const userId = searchParam.get("user");
   type removeListType = {
     name: string;
@@ -53,14 +53,14 @@ function RemoveMedicine() {
     }, 500);
   }
   // Clear remove Search.....
-  function clearSearch(event: React.MouseEvent<HTMLButtonElement>) {
+  function clearSearch() {
     setRecommend([]);
     if (searchDelete.current) {
       searchDelete.current.value = "";
     }
   }
   // select from recommend list
-  function selectRemove(event: React.MouseEvent<HTMLDivElement>, item: string) {
+  function selectRemove(item: string) {
     let value = item;
     MedData.map(item => {
       if (item.name.toLowerCase() == value.toLowerCase()) {
@@ -74,6 +74,7 @@ function RemoveMedicine() {
   function unselect(ind: number) {
     setRemoveList(prev => {
       return prev.filter((item, index) => {
+        item;
         return index != ind;
       });
     });
@@ -108,12 +109,12 @@ function RemoveMedicine() {
             placeholder="Search medicine to delete"
             onChange={event => searchToRemove(event)}
           />
-          <button onClick={event => clearSearch(event)}>Clear</button>
+          <button onClick={() => clearSearch()}>Clear</button>
         </div>
         <div id="recommendRemove">
           {recommend.map((item, index) => {
             return (
-              <div key={index} onClick={event => selectRemove(event, item)}>
+              <div key={index} onClick={() => selectRemove(item)}>
                 {item}
               </div>
             );
