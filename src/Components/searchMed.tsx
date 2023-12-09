@@ -117,6 +117,7 @@ function SearchMedicine() {
       sellArr.push({ quantity: item.quantity, name: item.name });
     });
     dispatch(userActions.sellMedicine({ sellList: sellArr, userId: userId }));
+    alert("Items Sold");
   }
   return (
     <React.Fragment>
