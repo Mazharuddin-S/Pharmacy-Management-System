@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../CSS/removeMedicine.css";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { userActions } from "../Store/store";
@@ -22,15 +22,18 @@ function RemoveMedicine() {
     expiryDate: string;
   };
   const [recommend, setRecommend] = useState<string[]>([]);
+
   const [removeList, setRemoveList] = useState<removeListType[]>([]);
   const [confirm, setConfirm] = useState(false);
+  const searchDelete = useRef<HTMLInputElement | null>(null);
+  const debounce = useRef<number | undefined>(undefined);
   ///Search to remove
   function searchToRemove(event: React.ChangeEvent<HTMLInputElement>) {
     let value = event.target.value.toLowerCase();
-    clearTimeout(window.debounce);
-
-    window.debounce = setTimeout(() => {
+    clearTimeout(debounce.current);
+    debounce.current = setTimeout(() => {
       setRecommend([]);
+      console.log("setTimeout activated");
 
       if (value == " ") {
         setRecommend([]);
@@ -52,11 +55,13 @@ function RemoveMedicine() {
   // Clear remove Search.....
   function clearSearch(event: React.MouseEvent<HTMLButtonElement>) {
     setRecommend([]);
-    event.target.previousElementSibling.value = "";
+    if (searchDelete.current) {
+      searchDelete.current.value = "";
+    }
   }
   // select from recommend list
-  function selectRemove(event: React.MouseEvent<HTMLDivElement>) {
-    let value = event.target.innerText;
+  function selectRemove(event: React.MouseEvent<HTMLDivElement>, item: string) {
+    let value = item;
     MedData.map((item, index) => {
       if (item.name.toLowerCase() == value.toLowerCase()) {
         setRemoveList(prev => {
@@ -99,6 +104,7 @@ function RemoveMedicine() {
         <div id="typeToRemove">
           <input
             type="text"
+            ref={searchDelete}
             placeholder="Search medicine to delete"
             onChange={event => searchToRemove(event)}
           />
@@ -107,7 +113,7 @@ function RemoveMedicine() {
         <div id="recommendRemove">
           {recommend.map((item, index) => {
             return (
-              <div key={index} onClick={event => selectRemove(event)}>
+              <div key={index} onClick={event => selectRemove(event, item)}>
                 {item}
               </div>
             );

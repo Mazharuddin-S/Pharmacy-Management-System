@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../CSS/home.css";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { userActions } from "../Store/store";
+import { MedObjectType, userActions } from "../Store/store";
 import { useSearchParams } from "react-router-dom";
 
 function SearchMedicine() {
@@ -19,19 +19,24 @@ function SearchMedicine() {
     stock: number;
     content: string;
     expiryDate: string;
-  }[];
+  };
 
-  const [data, setData] = useState<dataType>([]);
+  const [data, setData] = useState<dataType[]>([]);
 
-  const [selected, setSelected] = useState<any>([]);
+  const [selected, setSelected] = useState<dataType[]>([]);
+
+  const [forSum, setForsum] = useState<
+    { name: string; price: number; quantity: number }[]
+  >([]);
 
   const [total, setTotal] = useState(0);
+  const inputSearch = useRef<HTMLInputElement | null>(null);
 
   // SEARCH MEDICINE ----------------
   function searchMed(event: React.ChangeEvent<HTMLInputElement>) {
     let value = event.target.value.toLowerCase();
     if (value) {
-      let filteredData = MedData.medicineList.filter(item => {
+      let filteredData = MedData.medicineList.filter((item: MedObjectType) => {
         return (
           item.name.toLowerCase().startsWith(value) ||
           item.name.toLowerCase().includes(value)
@@ -44,15 +49,22 @@ function SearchMedicine() {
     }
   }
   // CLICK HANDLER ----------------
-  function clickHandler(event: React.MouseEvent<HTMLDivElement>) {
-    let value = event.target.innerText.toLowerCase();
+  function clickHandler(event: React.MouseEvent<HTMLDivElement>, name: string) {
+    let value = name.toLowerCase();
 
-    let selected = MedData.medicineList.filter((item, index) => {
-      return (
-        item.name.toLowerCase().startsWith(value) ||
-        item.name.toLowerCase().includes(value)
-      );
-    });
+    let selected = MedData.medicineList.filter(
+      (item: MedObjectType, index: number) => {
+        if (item.name == value) {
+          setForsum(prev => {
+            return [...prev, { name: value, price: item.price, quantity: 1 }];
+          });
+        }
+        return (
+          item.name.toLowerCase().startsWith(value) ||
+          item.name.toLowerCase().includes(value)
+        );
+      }
+    );
     setSelected((prev: any) => {
       return [...prev, ...selected];
     });
@@ -67,36 +79,44 @@ function SearchMedicine() {
   }
   // CLEAR HANDLER ----------------
   function clearHandler() {
-    let inputSearch = document.getElementById("inputSearch");
-    if (inputSearch) {
-      inputSearch.value = "";
+    if (inputSearch.current) {
+      inputSearch.current.value = "";
     }
     setData([]);
   }
   // QUANT HANDLER ...............
   function quantHandler(
     event: React.ChangeEvent<HTMLInputElement>,
-    price: number
-  ) {}
+    name: string
+  ) {
+    let arr = [...forSum];
+    let modified: { name: string; price: number; quantity: number }[] = [];
+    arr.map((item, index) => {
+      if (item.name.toLowerCase() == name.toLowerCase()) {
+        modified.push({ ...item, quantity: +event.target.value });
+      } else {
+        modified.push(item);
+      }
+    });
+    setForsum(prev => {
+      return modified;
+    });
+  }
   // TOTAL Handler ..............
   function totalSum() {
-    let quanter = document.getElementsByClassName("quanter");
     let sum = 0;
-    for (var i = 0; i < quanter.length; i++) {
-      let price = +quanter[i].dataset.price;
-      sum = sum + quanter[i].value * price;
-    }
+    forSum.map(item => {
+      sum = sum + item.price * item.quantity;
+    });
+
     setTotal(sum);
   }
   // Sell......
   function sell() {
-    let quanter = document.getElementsByClassName("quanter");
-    let sellArr = [];
-    for (var i = 0; i < quanter.length; i++) {
-      let quantity = quanter[i].value;
-      let name = quanter[i].dataset.name;
-      sellArr.push({ quantity: quantity, name: name });
-    }
+    let sellArr: { quantity: number; name: string }[] = [];
+    forSum.map(item => {
+      sellArr.push({ quantity: item.quantity, name: item.name });
+    });
     dispatch(userActions.sellMedicine({ sellList: sellArr, userId: userId }));
   }
   return (
@@ -106,7 +126,7 @@ function SearchMedicine() {
           <input
             type="text"
             placeholder="Search Medicine"
-            id="inputSearch"
+            ref={inputSearch}
             onChange={event => searchMed(event)}
           />
           <button onClick={clearHandler}>clear</button>
@@ -117,7 +137,7 @@ function SearchMedicine() {
               item.name.slice(0, 1).toUpperCase() +
               item.name.slice(1).toLowerCase();
             return (
-              <div key={index} onClick={event => clickHandler(event)}>
+              <div key={index} onClick={event => clickHandler(event, name)}>
                 {name}
               </div>
             );
@@ -139,6 +159,7 @@ function SearchMedicine() {
                   onClick={() => {
                     setSelected([]);
                     setTotal(0);
+                    setForsum([]);
                   }}
                 >
                   Remove all
@@ -158,9 +179,9 @@ function SearchMedicine() {
                     <input
                       type="number"
                       className="quanter"
-                      data-price={item.price}
-                      data-name={item.name}
-                      onChange={event => quantHandler(event, item.price)}
+                      // data-price={item.price}
+                      // data-name={item.name}
+                      onChange={event => quantHandler(event, item.name)}
                       defaultValue={1}
                       step={1}
                       min={1}

@@ -3,8 +3,6 @@ import "../CSS/loginPage.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { userActions } from "../Store/store";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 function Login() {
   const dispatch = useDispatch();
