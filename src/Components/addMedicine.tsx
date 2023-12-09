@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../CSS/addMedicine.css";
-import { useDispatch, useSelector } from "react-redux/es/exports";
+import { useDispatch } from "react-redux/es/exports";
 import { userActions } from "../Store/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
@@ -10,9 +10,7 @@ function AddMedicine() {
   let dispatch = useDispatch();
   let [searchParam, setSearchParam] = useSearchParams();
   let userId = searchParam.get("user");
-  let medData = useSelector((state: any) => {
-    return state.useData;
-  });
+
   type medType = {
     name: string;
     price: number;

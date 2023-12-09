@@ -39,7 +39,7 @@ function RemoveMedicine() {
         setRecommend([]);
       }
       if (value) {
-        MedData.map((item, index) => {
+        MedData.map(item => {
           if (
             item.name.toLowerCase().startsWith(value) ||
             item.name.toLowerCase().includes(value)
@@ -62,7 +62,7 @@ function RemoveMedicine() {
   // select from recommend list
   function selectRemove(event: React.MouseEvent<HTMLDivElement>, item: string) {
     let value = item;
-    MedData.map((item, index) => {
+    MedData.map(item => {
       if (item.name.toLowerCase() == value.toLowerCase()) {
         setRemoveList(prev => {
           return [...prev, item];

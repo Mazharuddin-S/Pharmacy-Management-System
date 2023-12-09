@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "../CSS/home.css";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
@@ -52,19 +52,17 @@ function SearchMedicine() {
   function clickHandler(event: React.MouseEvent<HTMLDivElement>, name: string) {
     let value = name.toLowerCase();
 
-    let selected = MedData.medicineList.filter(
-      (item: MedObjectType, index: number) => {
-        if (item.name == value) {
-          setForsum(prev => {
-            return [...prev, { name: value, price: item.price, quantity: 1 }];
-          });
-        }
-        return (
-          item.name.toLowerCase().startsWith(value) ||
-          item.name.toLowerCase().includes(value)
-        );
+    let selected = MedData.medicineList.filter((item: MedObjectType) => {
+      if (item.name == value) {
+        setForsum(prev => {
+          return [...prev, { name: value, price: item.price, quantity: 1 }];
+        });
       }
-    );
+      return (
+        item.name.toLowerCase().startsWith(value) ||
+        item.name.toLowerCase().includes(value)
+      );
+    });
     setSelected((prev: any) => {
       return [...prev, ...selected];
     });
@@ -91,7 +89,7 @@ function SearchMedicine() {
   ) {
     let arr = [...forSum];
     let modified: { name: string; price: number; quantity: number }[] = [];
-    arr.map((item, index) => {
+    arr.map(item => {
       if (item.name.toLowerCase() == name.toLowerCase()) {
         modified.push({ ...item, quantity: +event.target.value });
       } else {

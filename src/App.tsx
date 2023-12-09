@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Routes, Route, useParams, useSearchParams } from "react-router-dom";
 import "./App.css";
 import Login from "./Components/Login";
@@ -12,9 +11,6 @@ import Expiring from "./Components/expiring";
 import OutOfStock from "./Components/outOfStock";
 
 function App() {
-  const [searchParam, setSearchParam] = useSearchParams();
-  const userId = searchParam.get("user");
-
   return (
     <div className="app">
       <Routes>

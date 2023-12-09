@@ -44,7 +44,8 @@ export const signUpActions = signUpSlice.actions;
 // User Individual Data
 let searchParam = new URLSearchParams(window.location.search);
 let userId = searchParam.get("user");
-let userData = JSON.parse(localStorage.getItem(userId)) || {};
+let userInfo = localStorage.getItem(userId ? userId : "user");
+let userData = JSON.parse(userInfo ? userInfo : "{}") || {};
 
 let userDataSlice = createSlice({
   name: "userData",

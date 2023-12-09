@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
 import "../CSS/home.css";
 import SideBar from "./sideBar";
-import SearchMedicine from "./searchMed";
-import { Outlet, useParams, useSearchParams } from "react-router-dom";
+
+import { Outlet, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function Home() {
@@ -12,7 +11,6 @@ function Home() {
   });
 
   let userId = searchParam.get("user");
-  let [userData, setUserdata] = useState({});
 
   return (
     <div id="home">
