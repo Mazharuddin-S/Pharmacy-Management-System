@@ -90,6 +90,7 @@ function SearchMedicine() {
   ) {
     let arr = [...forSum];
     let modified: { name: string; price: number; quantity: number }[] = [];
+
     arr.map(item => {
       if (item.name.toLowerCase() == name.toLowerCase()) {
         modified.push({ ...item, quantity: +event.target.value });
@@ -104,6 +105,7 @@ function SearchMedicine() {
   // TOTAL Handler ..............
   function totalSum() {
     let sum = 0;
+
     forSum.map(item => {
       sum = sum + item.price * item.quantity;
     });
@@ -179,10 +181,7 @@ function SearchMedicine() {
                     <input
                       type="number"
                       className="quanter"
-                      // data-price={item.price}
-                      // data-name={item.name}
                       onChange={event => quantHandler(event, item.name)}
-                      defaultValue={1}
                       step={1}
                       min={1}
                     />
